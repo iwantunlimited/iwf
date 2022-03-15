@@ -17,7 +17,9 @@ function CreateInstance(){
         file: null
     })
 
-    const { file } = data
+    const { file } = data;
+
+    console.log(data);
 
     const apiCall = React.useCallback(() => {
         axios.get("http://localhost:21001/create-instance",{file}).then((res) => {
@@ -29,8 +31,6 @@ function CreateInstance(){
         apiCall()
     },[apiCall])
 
-
-    console.log(data);
 
     return(
         <>
