@@ -38,50 +38,17 @@ function SearchInstance(){
             "Timestamp": "2021-12-15 08:46:02",
             "General7": "271",
             "General5": "8.8.8.8",
-        },
-        {
-            "SerialNumber": "108",
-            "general4": "53058",
-            "private-ip-address": "100.111.254.30",
-            "port-id": "53058",
-            "public-ip-address": "42.108.235.67",
-            "General6": "53",
-            "Timestamp": "2021-12-15 08:46:02",
-            "General7": "271",
-            "General5": "8.8.8.8",
-        },
-        {
-            "SerialNumber": "108",
-            "general4": "53058",
-            "private-ip-address": "100.111.254.30",
-            "port-id": "53058",
-            "public-ip-address": "42.108.235.67",
-            "General6": "53",
-            "Timestamp": "2021-12-15 08:46:02",
-            "General7": "271",
-            "General5": "8.8.8.8",
-        },
-        {
-            "SerialNumber": "108",
-            "general4": "53058",
-            "private-ip-address": "100.111.254.30",
-            "port-id": "53058",
-            "public-ip-address": "42.108.235.67",
-            "General6": "53",
-            "Timestamp": "2021-12-15 08:46:02",
-            "General7": "271",
-            "General5": "8.8.8.8",
         }
     ]
 
     const [data,setData] = React.useState({
-        driverid: '',
-        keyword:'',
+        driverId: '',
+        content:'',
         limit: '10'
 
     })
 
-    const { driverid, keyword,limit } = data
+    const { driverId, content,limit } = data
 
     function handleChange(event) {
         const { name,value  } = event.target;
@@ -91,15 +58,22 @@ function SearchInstance(){
         }))
     }
 
-    const apiCall = React.useCallback(() => {
-        axios.post("http://localhost:21001/search-content").then((res) => {
+    function handlesubmit(event){
+        event.preventDefault()
+        axios.post("http://64.227.177.87:21001/search-content",{...data},{
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => {
             console.log(res);
+            // console.log(res.data);
         }).catch((err) => console.log(err))
-    },[])
+    }
 
-    React.useEffect(() => {
-        apiCall()
-    },[apiCall])
+
+    // React.useEffect(() => {
+    //     apiCall()
+    // },[apiCall])
 
     console.log(data);
 
@@ -111,13 +85,13 @@ function SearchInstance(){
                     <div style={{fontSize:'20px'}}>
                         Search Instance
                     </div>
-                    <form onSubmit={() => alert("submitted",data.driverid)}>
+                    <form onSubmit={handlesubmit}>
                         <Grid item container xs={12} spacing={2} style={{marginTop:'20px'}}>
                             <Grid item xs={3}>
-                                <TextField required placeholder="Driver Id" name="driverid" value={driverid} onChange={handleChange}  />
+                                <TextField required placeholder="Driver Id" name="driverId" value={driverId} onChange={handleChange}  />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField required placeholder="Keyword" name="keyword" value={keyword} onChange={handleChange}  />
+                                <TextField required placeholder="Keyword" name="content" value={content} onChange={handleChange}  />
                             </Grid>
                             <Grid item xs={2}>
                                 {/* <InputLabel id="demo-simple-select-label">Limit</InputLabel> */}

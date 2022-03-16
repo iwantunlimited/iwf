@@ -1,10 +1,6 @@
 import React from "react";
 import { Button, Card, Container } from "@mui/material";
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -19,17 +15,34 @@ function CreateInstance(){
 
     const { file } = data;
 
+    // const handleChange = e => {
+    //     const fileReader = new FileReader();
+    //     fileReader.readAsText(e.target.files[0], "UTF-8");
+    //     fileReader.onload = e => {
+    //       console.log("e.target.result", e.target.result);
+    //       setData({file: e.target.result});
+    //     };
+    //   };
+
     console.log(data);
 
-    const apiCall = React.useCallback(() => {
-        axios.get("http://localhost:21001/create-instance",{file}).then((res) => {
-            console.log(res);
-        }).catch((err) => console.log(err))
-    },[])
 
-    React.useEffect(() => {
-        apiCall()
-    },[apiCall])
+    function handleSubmit(event) {
+        event.preventDefault()
+
+        console.log(file[0])
+
+        let formData = new FormData()
+        formData.append('jsonFile', file[0])
+        axios.post("http://192.168.2.30:21001/create-instance",formData,{
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }).then((res) => {
+            console.log(res);
+            navigate('/searchinstance')
+        }).catch((err) => console.log(err))
+    }
 
 
     return(
@@ -38,12 +51,17 @@ function CreateInstance(){
                 <Card elevation={4} style={{padding:'20px',marginTop:'20px'}}>
                     <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
                         <div style={{color: 'grey',fontSize: '30px'}}>Create Instance</div>
-                           <form onSubmit={apiCall}>
+                           <form onSubmit={handleSubmit} encType="multipart/form-data">
                             <Box style={{marginTop:'30px'}}>
-                                    <input type="file" name="file" required onChange={(event) => setData({ file: event.target.value })}  />
+                                    <input 
+                                        type="file"
+                                        accept=".json"
+                                        name="file"
+                                        onChange={(event) => setData({ file: event.target.files })}  
+                                        // onChange={handleChange}
+                                    />
                                 </Box>
-                                <Button 
-                                    onClick={() => navigate('/searchinstance')}
+                                <Button
                                     variant="contained" 
                                     style={{marginTop:'20px',borderRadius:'20px'}}
                                     type="submit"
