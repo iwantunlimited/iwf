@@ -142,7 +142,9 @@ function SearchInstance(){
                     </form>
                 </Card>
                 <div style={{fontSize: '20px',color:'grey',marginTop:'20px',marginBottom:'20px'}}>Output :</div>
-                
+                {
+                     testData?.payload?.length === 0 && <div>No Data Found</div>
+                }
                 {
                     testData && testData.payload && testData.payload.length > 0 &&
                     <Grid item container xs={12} spacing={4}>
