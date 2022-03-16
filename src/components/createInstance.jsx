@@ -34,7 +34,7 @@ function CreateInstance(){
 
         let formData = new FormData()
         formData.append('jsonFile', file[0])
-        axios.post("http://192.168.2.30:21001/create-instance",formData,{
+        axios.post("http://64.227.177.87:21001/create-instance",formData,{
             headers: {
                 "Content-Type": "multipart/form-data"
             }
