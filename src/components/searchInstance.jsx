@@ -42,11 +42,15 @@ function SearchInstance(){
     ]
 
     const [data,setData] = React.useState({
-        driverId: '',
+        driverId: 'CGNAT',
         content:'',
         limit: '10'
 
     })
+
+    const [testData,setTestData] = React.useState('')
+
+    console.log("testData",testData);
 
     const { driverId, content,limit } = data
 
@@ -58,22 +62,20 @@ function SearchInstance(){
         }))
     }
 
+    console.log(data);
+
     function handlesubmit(event){
         event.preventDefault()
-        axios.post("http://64.227.177.87:21001/search-content",{...data},{
+
+        axios.post("http://192.168.2.30:21001/search-content",{...data},{
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((res) => {
-            console.log(res);
-            // console.log(res.data);
+            // console.log(res);
+            setTestData(res.data)
         }).catch((err) => console.log(err))
     }
-
-
-    // React.useEffect(() => {
-    //     apiCall()
-    // },[apiCall])
 
     console.log(data);
 
@@ -88,7 +90,21 @@ function SearchInstance(){
                     <form onSubmit={handlesubmit}>
                         <Grid item container xs={12} spacing={2} style={{marginTop:'20px'}}>
                             <Grid item xs={3}>
-                                <TextField required placeholder="Driver Id" name="driverId" value={driverId} onChange={handleChange}  />
+                                {/* <TextField required placeholder="Driver Id" name="driverId" value={driverId} onChange={handleChange}  /> */}
+                                <Select
+                                    required
+                                    fullWidth
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={driverId}
+                                    name="driverId"
+                                    placeholder="driverId"
+                                    label="driverId"
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value={"CGNAT"}>CGNAT</MenuItem>
+                                    <MenuItem value={"CGF"}>CGF</MenuItem>
+                                </Select>
                             </Grid>
                             <Grid item xs={3}>
                                 <TextField required placeholder="Keyword" name="content" value={content} onChange={handleChange}  />
@@ -125,12 +141,13 @@ function SearchInstance(){
                         </Grid>
                     </form>
                 </Card>
-                <div style={{fontSize: '20px',color:'grey',marginTop:'20px',marginBottom:'20px'}}>Output</div>
+                <div style={{fontSize: '20px',color:'grey',marginTop:'20px',marginBottom:'20px'}}>Output :</div>
                 
-                {/* <Card> */}
-                <Grid item container xs={12} spacing={4}>
                 {
-                    trialData.map((ele) => {
+                    testData && testData.payload && testData.payload.length > 0 &&
+                    <Grid item container xs={12} spacing={4}>
+                {
+                    testData && testData.payload.map((ele) => {
                         return(
                             <Grid item xs={6}>
                             <Card elevation={4} style={{padding:'20px'}}>
@@ -151,7 +168,7 @@ function SearchInstance(){
                     })
                 }
                 </Grid>
-                {/* </Card> */}
+                }
                 
             </Container>
         </>

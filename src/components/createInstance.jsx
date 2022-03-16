@@ -15,15 +15,6 @@ function CreateInstance(){
 
     const { file } = data;
 
-    // const handleChange = e => {
-    //     const fileReader = new FileReader();
-    //     fileReader.readAsText(e.target.files[0], "UTF-8");
-    //     fileReader.onload = e => {
-    //       console.log("e.target.result", e.target.result);
-    //       setData({file: e.target.result});
-    //     };
-    //   };
-
     console.log(data);
 
 
@@ -34,6 +25,7 @@ function CreateInstance(){
 
         let formData = new FormData()
         formData.append('jsonFile', file[0])
+        
         axios.post("http://192.168.2.30:21001/create-instance",formData,{
             headers: {
                 "Content-Type": "multipart/form-data"
@@ -58,7 +50,7 @@ function CreateInstance(){
                                         accept=".json"
                                         name="file"
                                         onChange={(event) => setData({ file: event.target.files })}  
-                                        // onChange={handleChange}
+                                        
                                     />
                                 </Box>
                                 <Button
