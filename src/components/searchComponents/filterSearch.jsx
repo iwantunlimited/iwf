@@ -77,12 +77,12 @@ function FilterSearch(){
     return(
         <>
             <Container maxWidth="lg" style={{paddingBottom: '30px'}}>
-            <Card elevation={4} style={{padding:'20px',marginTop:'20px'}}>
-                <div style={{fontSize:'20px'}}>
+            <Card elevation={4} style={{padding:'25px',marginTop:'20px'}}>
+                {/* <div style={{fontSize:'20px'}}>
                     Search Instance
-                </div>
+                </div> */}
                 <form onSubmit={handlesubmit}>
-                    <Grid item container xs={12} spacing={2} style={{marginTop:'20px'}}>
+                    <Grid item container xs={12} spacing={2} >
                         <Grid item xs={2}>
                             {/* <TextField required placeholder="Driver Id" name="driverId" value={driverId} onChange={handleChange}  /> */}
                             <Select
