@@ -67,7 +67,7 @@ function SearchInstance(){
     function handlesubmit(event){
         event.preventDefault()
 
-        axios.post("http://64.227.177.87:21001/search-content",{...data},{
+        axios.post("http://136.232.113.214:21001/search-content",{...data},{
             headers: {
                 'Content-Type': 'application/json'
             }
