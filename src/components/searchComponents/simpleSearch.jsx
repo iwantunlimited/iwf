@@ -33,13 +33,8 @@ function SearchInstances(){
 
     function handlesubmit(event){
         event.preventDefault()
-<<<<<<< HEAD
-        console.log("api called");
-        axios.post("http://64.227.177.87:21001/search-content",{...data},{
-=======
 
-        axios.post("http://136.232.113.214:21001/search-content",{...data},{
->>>>>>> 04b95ca2141bf0206db0b6dfb769f5da3d41510e
+        axios.post("http://64.227.177.87:21001/search-content",{...data},{
             headers: {
                 'Content-Type': 'application/json'
             }

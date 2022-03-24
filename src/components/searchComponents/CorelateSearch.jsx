@@ -62,7 +62,7 @@ function CorelateSearch(){
     function handlesubmit(event){
         event.preventDefault()
 
-        axios.post("http://192.168.2.30:21001/correlate-search",{...data},{
+        axios.post("http://64.227.177.87:21001/correlate-search",{...data},{
             headers: {
                 'Content-Type': 'application/json'
             }
