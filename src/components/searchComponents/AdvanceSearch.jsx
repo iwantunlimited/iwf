@@ -7,6 +7,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { Formik, Field, Form, FieldArray } from "formik";
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import './main.css'
+import { portId } from "../../env";
 
 
 
@@ -63,7 +64,7 @@ function AdvanceSearch(){
     function handlesubmit(event){
         event.preventDefault()
 
-        axios.post("http://136.232.113.214:21001/search-all",{...data},{
+        axios.post( portId +"/search-all",{...data},{
             headers: {
                 'Content-Type': 'application/json'
             }

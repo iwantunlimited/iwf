@@ -1,5 +1,6 @@
 
 import { useRoutes } from "react-router-dom";
+import CreateInstance from "./components/createInstance";
 import AdvanceSearch from "./components/searchComponents/AdvanceSearch";
 import CorelateSearch from "./components/searchComponents/CorelateSearch";
 import FilterSearch from "./components/searchComponents/filterSearch";
@@ -26,6 +27,11 @@ const Routes = () => {
                 {
                     path: '/advancesearch',
                     element: <FilterSearch />,
+                    // element: <AdvanceSearch  />
+                },,
+                {
+                    path: '/createinstance',
+                    element: <CreateInstance />,
                     // element: <AdvanceSearch  />
                 },
                 {

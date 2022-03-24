@@ -43,8 +43,8 @@ function CreateInstance(){
                 <Card elevation={4} style={{padding:'20px',marginTop:'20px'}}>
                     <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
                         <div style={{color: 'grey',fontSize: '30px'}}>Create Instance</div>
-                           <form onSubmit={handleSubmit} encType="multipart/form-data">
-                            <Box style={{marginTop:'30px'}}>
+                           <form onSubmit={handleSubmit} encType="multipart/form-data" >
+                                <Box style={{marginTop:'30px'}}>
                                     <input 
                                         type="file"
                                         accept=".json"
@@ -53,13 +53,15 @@ function CreateInstance(){
                                         
                                     />
                                 </Box>
+                                <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
                                 <Button
                                     variant="contained" 
-                                    style={{marginTop:'20px',borderRadius:'20px'}}
+                                    style={{marginTop:'20px',borderRadius:'20px',background:'#23395d'}}
                                     type="submit"
                                 >
                                     Create
                                 </Button>
+                                </div>
                            </form>
                     </div>
                 </Card>

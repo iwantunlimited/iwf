@@ -3,6 +3,7 @@ import {  Card, Container, TextField,Grid,Select,MenuItem, Button, FormControl, 
 import axios from "axios";
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import './main.css'
+import { portId } from "../../env";
 
 function SearchInstances(){
 
@@ -34,7 +35,7 @@ function SearchInstances(){
     function handlesubmit(event){
         event.preventDefault()
 
-        axios.post("http://64.227.177.87:21001/search-content",{...data},{
+        axios.post(portId + "/search-content",{...data},{
             headers: {
                 'Content-Type': 'application/json'
             }
