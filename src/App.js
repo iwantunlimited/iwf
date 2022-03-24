@@ -1,19 +1,19 @@
 import './App.css';
-import CreateInstance from './components/createInstance';
-import { Routes, Route } from "react-router-dom";
-import HeaderTab from './components/headerTab';
-import SearchInstance from './components/searchInstance';
+import { BrowserRouter } from "react-router-dom";
+import Routes from './Routes';
 
 
 function App() {
   return (
-   <div>
-     <Routes>
+    <BrowserRouter>
+    <Routes  />
+     {/* <Routes>
         <Route path="/createinstance" element={<CreateInstance />} />
-        {/* <Route path="/searchinstance" element={<SearchInstance />} /> */}
+        <Route path="/searchinstance" element={<SearchInstance />} />
         <Route path="/" element={<HeaderTab />} />
-      </Routes>
-   </div>
+        <Route path="/" element={<TrialF />} />
+      </Routes>  */}
+    </BrowserRouter>
   );
 }
 

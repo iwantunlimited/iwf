@@ -9,6 +9,7 @@ import SearchInstances from "./searchComponents/simpleSearch";
 import FilterSearch from "./searchComponents/filterSearch";
 import AdvanceSearch from "./searchComponents/AdvanceSearch";
 import Logo from '../logo.png'
+import CorelateSearch from "./searchComponents/CorelateSearch";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -82,10 +83,12 @@ function HeaderTab(){
                    <SearchInstances  />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <FilterSearch  />
+                    {/* <FilterSearch  /> */}
+                    <CorelateSearch  />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <AdvanceSearch  />
+                    {/* <AdvanceSearch  /> */}
+                    <FilterSearch  />>
                 </TabPanel>
             </Box>
                 

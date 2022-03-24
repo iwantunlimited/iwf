@@ -4,13 +4,12 @@ import axios from "axios";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { Formik, Field, Form, FieldArray } from "formik";
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import DateTimePicker from "@mui/lab/DateTimePicker";
 import './main.css'
 
 
-
-function AdvanceSearch(){
+function CorelateSearch(){
 
     const [data,setData] = React.useState({
         driverId: 'CGNAT',
@@ -35,7 +34,7 @@ function AdvanceSearch(){
     
     const { driverId,filters } = data
 
-    console.log("date>>>>>>>>>>>",data.filters);
+    console.log("date>>>>>>>>>>>",filters);
 
     const [testData,setTestData] = React.useState('')
 
@@ -45,10 +44,10 @@ function AdvanceSearch(){
         setData((prev) => ({
             ...prev,
             'filters': prev.filters.map((ele, index) => {
-                    
                     if(index === 0) {
                         return ele
                     }else{
+                        console.log('event', event.target)
                         return({
                             ...ele,
                             [event.target.name]:event.target.value
@@ -63,7 +62,7 @@ function AdvanceSearch(){
     function handlesubmit(event){
         event.preventDefault()
 
-        axios.post("http://64.227.177.87:21001/search-all",{...data},{
+        axios.post("http://192.168.2.30:21001/correlate-search",{...data},{
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -89,6 +88,7 @@ function AdvanceSearch(){
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">DriverId</InputLabel>
                                 <Select
+                                    className="select-css"
                                     required
                                     fullWidth
                                     labelId="demo-simple-select-label"
@@ -104,12 +104,38 @@ function AdvanceSearch(){
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid item xs={4}>
-                          
+                        <Grid item xs={3}>
+    
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DateRangePicker
-                                inputFormat="dd/MM/yyyy"
+                            <DateTimePicker
+                                renderInput={(props) => <TextField className="dateTime-css" fullWidth {...props} />}
+                                fullWidth
+                                label="start From"  
+                                ampm={false}
+                                inputFormat="dd/MM/yyyy HH:mm"
+                                value={data?.filters?.[0]?.rangeValue?.from}
+                                onChange={(newValue) => {
+                                    setData((prev) =>({
+                                        ...prev,
+                                        filters:  prev.filters.map((ele , index) =>{
+                                            if(index === 0){
+                                                return {
+                                                    ...ele,
+                                                    rangeValue: {
+                                                        ...ele.rangeValue,
+                                                        from: newValue.getTime()
+                                                    }
+                                                }
+                                            }else{
+                                                return ele
+                                            }
+                                        })
+                                    }))
+                                }}
+                            />
+                            {/* <DateRangePicker
                                 startText="From"
+                                inputFormat="dd/MM/yyyy"
                                 endText="TO"
                                 value={[data?.filters?.[0]?.rangeValue?.from , data?.filters?.[0]?.rangeValue?.to]}
                                 onChange={(newValue) => {
@@ -139,39 +165,72 @@ function AdvanceSearch(){
                                     <TextField {...endProps} />
                                 </React.Fragment>
                                 )}
+                            /> */}
+                            </LocalizationProvider>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DateTimePicker
+                                fullWidth
+                                ampm={false}
+                                minDate={data?.filters?.[0]?.rangeValue?.from}
+                                renderInput={(props) => <TextField className="dateTime-css" fullWidth {...props} />}
+                                label="End to"  
+                                inputFormat="dd/MM/yyyy HH:mm"
+                                value={data?.filters?.[0]?.rangeValue?.to}
+                                onChange={(newValue) => {
+                                    setData((prev) =>({
+                                        ...prev,
+                                        filters:  prev.filters.map((ele , index) =>{
+                                            if(index === 0){
+                                                return {
+                                                    ...ele,
+                                                    rangeValue: {
+                                                        ...ele.rangeValue,
+                                                        to: newValue.getTime()
+                                                    }
+                                                }
+                                            }else{
+                                                return ele
+                                            }
+                                        })
+                                    }))
+                                }}
                             />
                             </LocalizationProvider>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item container xs={12} spacing={2}>
+                        <Grid item xs={4}>
                             {
                                 data?.filters?.map((ele, index) =>{
                                     if(index > 0){
-                                        return <TextField required type="text" placeholder="Keyword" label="Keyword" value={ele.fieldName} name={"fieldName"}  onChange={handleChnage1}  />
+                                        return <TextField className="textField-css" fullWidth required type="text" placeholder="Keyword" label="Keyword" value={ele.fieldName} name={"fieldName"}  onChange={(e) => handleChnage1(e, null)}  />
                                     }else{
                                         return null
                                     }}
                                 )
                             }
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={4}>
                             {
                                 data?.filters?.map((ele, index) =>{
                                     if(index > 0){
-                                        return <TextField required type="text" placeholder="Value" label="Value" name={"value"} value={ele.value}  onChange={handleChnage1}  />
+                                        return <TextField className="textField-css" fullWidth required type="text" placeholder="Value" label="Value" name={"value"} value={ele.value}  onChange={(e) => handleChnage1(e, null)}  />
                                     }else{
                                         return null
                                     }}
                                 )
                             }
                         </Grid>
-                        <Grid item xs={2} style={{display:'flex',alignItems:'center'}}>
+                        <Grid item xs={12} style={{display:'flex',alignItems:'center'}}>
                             <Button 
                                 type="submit" 
                                 variant="contained" 
-                                style={{borderRadius:'20px'}}
+                                style={{borderRadius:'20px',background:'#23395d',textTransform:'none'}}
                             >
                                 Search
                             </Button>
+                        </Grid>
                         </Grid>
                     </Grid>
                 </form>
@@ -186,11 +245,11 @@ function AdvanceSearch(){
 
                 {
                     testData?.payload &&
-                    <div style={{width:'100%',height:'600px',background:'white'}}>
+                    <div style={{width:'100%',height:'600px',background:'white',padding:'10px'}}>
                         <DataGrid 
                             components={{ Toolbar: GridToolbar }} 
                             rows={testData.payload.map(ele => ({...ele ,id:Math.random()}))}
-                            columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),align:'center',flex:1,field:ele, headerName:ele.toUpperCase(), hide:false}))}
+                            columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),align:'center',width:120,field:ele, headerName:ele.toUpperCase(), hide:false}))}
                         />
                     </div>
                 }
@@ -224,4 +283,4 @@ function AdvanceSearch(){
     )
 }
 
-export default AdvanceSearch;
+export default CorelateSearch;

@@ -1,0 +1,73 @@
+.card-css{
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.output-card{
+    width: 100%;
+    padding: 20px;
+    min-height: 500px;
+    max-height: 800px;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
+}
+.textField-css > div > .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    height: 1.35rem;
+    min-height: 1.35rem;
+    padding-top: 12px;
+    padding-left: 14px;
+    padding-bottom: 12px;
+    padding-right: 10px;
+}
+.textField-css > label {
+    position: absolute;
+    top: -5px;
+    /* line-height: 1.85rem; */
+}
+.select-css > div {
+    height: 1.35rem;
+    min-height: 1.35rem;
+    padding-top: 12px;
+    padding-left: 14px;
+    padding-bottom: 12px;
+    padding-right: 10px;
+}
+
+.dateTime-css > div > .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    height: 1.35rem;
+    min-height: 1.4rem;
+    padding-top: 12px;
+    padding-left: 14px;
+    padding-bottom: 12px;
+    padding-right: 10px;
+}
+.value-btn-toggle{
+    text-transform: none !important;
+    border-bottom-left-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border: 1px solid #203354 !important;
+    /* background: #203354 !important; */
+    color: #203354 !important;
+}
+.range-btn-toggle{
+    text-transform: none !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    border: 1px solid #203354 !important;
+    /* background: #203354 !important; */
+    color: #203354 !important;
+}
+.range-btn-toggle:focus{
+    background: #203354 !important;
+    border: 1px solid #203354 !important;
+    color: white !important;
+}
+.value-btn-toggle:focus{
+    background: #203354 !important;
+    border: 1px solid #203354 !important;
+    color: white !important;
+}

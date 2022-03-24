@@ -1,8 +1,8 @@
 import React from "react";
-import {  Card, Container, TextField,Grid,Select,MenuItem, Button } from "@mui/material";
+import {  Card, Container, TextField,Grid,Select,MenuItem, Button, FormControl, InputLabel } from "@mui/material";
 import axios from "axios";
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
+import './main.css'
 
 function SearchInstances(){
 
@@ -33,7 +33,7 @@ function SearchInstances(){
 
     function handlesubmit(event){
         event.preventDefault()
-
+        console.log("api called");
         axios.post("http://64.227.177.87:21001/search-content",{...data},{
             headers: {
                 'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ function SearchInstances(){
     return(
         <>
             <Container maxWidth="lg" style={{paddingBottom: '30px'}}>
-            <Card elevation={4} style={{padding:'25px',marginTop:'20px'}}>
+            <Card elevation={2} className="card-css">
                 {/* <div style={{fontSize:'20px'}}>
                     Search Instance
                 </div> */}
@@ -58,49 +58,58 @@ function SearchInstances(){
                     <Grid item container xs={12} spacing={2}>
                         <Grid item xs={3}>
                             {/* <TextField required placeholder="Driver Id" name="driverId" value={driverId} onChange={handleChange}  /> */}
-                            <Select
-                                required
-                                fullWidth
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={driverId}
-                                name="driverId"
-                                placeholder="driverId"
-                                label="driverId"
-                                onChange={handleChange}
-                            >
-                                <MenuItem value={"CGNAT"}>CGNAT</MenuItem>
-                                <MenuItem value={"CGF"}>CGF</MenuItem>
-                            </Select>
+                            <FormControl fullWidth>
+                                <InputLabel  id="demo-simple-select-label">DriverId</InputLabel>
+                                <Select
+                                    className="select-css"
+                                    required
+                                    fullWidth
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={driverId}
+                                    name="driverId"
+                                    placeholder="driverId"
+                                    label="driverId"
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value={"CGNAT"}>CGNAT</MenuItem>
+                                    <MenuItem value={"CGF"}>CGF</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Grid item xs={3}>
-                            <TextField required placeholder="Keyword" name="content" value={content} onChange={handleChange}  />
+                            <TextField className="textField-css" required placeholder="Keyword" name="content" label="Keyword" value={content} onChange={handleChange}  />
                         </Grid>
                         <Grid item xs={2}>
                             {/* <InputLabel id="demo-simple-select-label">Limit</InputLabel> */}
-                            <Select
-                                required
-                                fullWidth
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={limit}
-                                name="limit"
-                                placeholder="Limit"
-                                label="Limit"
-                                onChange={handleChange}
-                            >
-                                <MenuItem value={10}>10</MenuItem>
-                                <MenuItem value={20}>20</MenuItem>
-                                <MenuItem value={30}>30</MenuItem>
-                                <MenuItem value={40}>40</MenuItem>
-                                <MenuItem value={50}>50</MenuItem>
-                            </Select>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Limit</InputLabel>
+                                <Select
+                                    className="select-css"
+                                    required
+                                    fullWidth
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={limit}
+                                    name="limit"
+                                    placeholder="Limit"
+                                    label="Limit"
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value={10}>10</MenuItem>
+                                    <MenuItem value={20}>20</MenuItem>
+                                    <MenuItem value={30}>30</MenuItem>
+                                    <MenuItem value={40}>40</MenuItem>
+                                    <MenuItem value={50}>50</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
-                        <Grid item xs={4} style={{display:'flex',alignItems:'center'}}>
+                        <Grid item xs={2} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
                             <Button 
+                                // fullWidth
                                 type="submit" 
                                 variant="contained" 
-                                style={{borderRadius:'20px'}}
+                                style={{borderRadius:'20px',background:'#23395d',textTransform:'none'}}
                             >
                                 Search
                             </Button>
@@ -110,20 +119,20 @@ function SearchInstances(){
             </Card>
             <div style={{fontSize: '20px',color:'grey',marginTop:'20px',marginBottom:'20px'}}>Output :</div>
             {
-                testData && testData.payload && testData.payload.length == 0 && <div style={{textAlign:'center'}}>No Data Found</div>
+                testData && testData.payload && testData.payload.length === 0 && <div style={{textAlign:'center'}}>No Data Found</div>
             }
             {
                 testData && testData.payload && testData.payload.length > 0 &&
                 <Grid item container xs={12} spacing={0} style={{marginTop:'20px'}}>
                 {
                     testData?.payload &&
-                    <div style={{width:'100%',height:'500px'}}>
+                    <Card className="output-card" >
                         <DataGrid 
-                         components={{ Toolbar: GridToolbar }} 
+                            components={{ Toolbar: GridToolbar }} 
                             rows={testData.payload.map(ele => ({...ele ,id:Math.random()}))}
-                            columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),width:115,field:ele, headerName:ele.toUpperCase(), hide:false}))}
+                            columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),align:'center',width:115,field:ele, headerName:ele.toUpperCase(), hide:false}))}
                         />
-                    </div>
+                    </Card>
                 }
             {/* {
                 testData && testData.payload.map((ele) => {

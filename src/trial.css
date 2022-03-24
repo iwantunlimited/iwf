@@ -1,0 +1,22 @@
+.textField{
+    /* background: #E6E6E6; */
+    border: 1px solid grey;
+    border-radius: 5px;
+    min-height: 35px;
+    margin-top: 5px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    padding-right: 2px;
+    padding-left: 10px;
+}
+.textField:focus-visible{
+    border: 1px solid grey !important;
+    outline-color: grey;
+    outline-width: 0.5px;
+}
+.cancel-icon{
+    font-size: medium;
+}
+.cancel-icon:hover{
+    color: brown;
+}
