@@ -113,7 +113,7 @@ function FilterSearch(){
     function handlesubmit(event){
         event.preventDefault()
 
-        axios.post("http://192.168.2.30:21001/search-all",{...data, filters: [data.filters[0], ...newTwoData]},{
+        axios.post("http://136.232.113.214:21001/correlate-search",{...data},{
             headers: {
                 'Content-Type': 'application/json'
             }
