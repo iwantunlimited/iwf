@@ -35,30 +35,33 @@ function CorelateSearch(){
     
     const { driverId,filters } = data
 
-    console.log("date>>>>>>>>>>>",filters);
+    // console.log("date>>>>>>>>>>>",filters);
 
     const [testData,setTestData] = React.useState('')
 
-    console.log("testData",testData);
+    // console.log("testData",testData);
 
     function handleChnage1(event){ 
         setData((prev) => ({
             ...prev,
             'filters': prev.filters.map((ele, index) => {
                     if(index === 0) {
-                        return ele
-                    }else{
-                        console.log('event', event.target)
                         return({
                             ...ele,
-                            [event.target.name]:event.target.value
+                            [event.target.name]: null
+                        })
+                    }else{
+                        // console.log('event', event.target.value)
+                        return({
+                            ...ele,
+                            [event.target.name]: event.target.value.length>0 ? event.target.value : null
                         })
                     }
             })
         }))
     }
 
-    console.log(data);
+    // console.log(data);
 
     function handlesubmit(event){
         event.preventDefault()
@@ -205,7 +208,7 @@ function CorelateSearch(){
                             {
                                 data?.filters?.map((ele, index) =>{
                                     if(index > 0){
-                                        return <TextField className="textField-css" fullWidth required type="text" placeholder="Keyword" label="Keyword" value={ele.fieldName} name={"fieldName"}  onChange={(e) => handleChnage1(e, null)}  />
+                                        return <TextField className="textField-css" fullWidth type="text" placeholder="Keyword" label="Keyword" value={ele.fieldName} name={"fieldName"}  onChange={(e) => handleChnage1(e, null)}  />
                                     }else{
                                         return null
                                     }}
@@ -216,7 +219,7 @@ function CorelateSearch(){
                             {
                                 data?.filters?.map((ele, index) =>{
                                     if(index > 0){
-                                        return <TextField className="textField-css" fullWidth required type="text" placeholder="Value" label="Value" name={"value"} value={ele.value}  onChange={(e) => handleChnage1(e, null)}  />
+                                        return <TextField className="textField-css" fullWidth type="text" placeholder="Value" label="Value" name={"value"} value={ele.value}  onChange={(e) => handleChnage1(e, null)}  />
                                     }else{
                                         return null
                                     }}

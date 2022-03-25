@@ -32,17 +32,17 @@ function FilterSearch(){
         }
     ])
 
-    console.log(
-        "inutsdfcxdscsdd",inputFieldsState.map((ele) => {
-            return {
-                ...ele?.fields?.map((eleName) => {
-                    return{
-                        ...eleName,
-                    }
-                })
-            }
-        })
-    );
+    // console.log(
+    //     "inutsdfcxdscsdd",inputFieldsState.map((ele) => {
+    //         return {
+    //             ...ele?.fields?.map((eleName) => {
+    //                 return{
+    //                     ...eleName,
+    //                 }
+    //             })
+    //         }
+    //     })
+    // );
 
     const newDataFields = inputFieldsState.map((ele) => {
         return {
@@ -57,16 +57,16 @@ function FilterSearch(){
     const newTwoData = newDataFields.map((ele, eIndex) => {
             if(toggleButton.filter((tbEle, tBIndex) => tbEle.index === eIndex).length > 0 && toggleButton.filter((tbEle, tBIndex) => tbEle.index === eIndex)[0].name === 'value'){
                 return{
-                    fieldName: ele[0].value, value: ele[1].value
+                    fieldName: ele[0].value.length > 0 ? ele[0].value : null, value: ele[1].value.length>0 ? ele[1].value : null
                 }
             } else {
                 return{
-                    fieldName: ele[0].value, rangeValue: {  from: parseInt(ele[1].value), to:parseInt(ele[2].value) }
+                    fieldName: ele[0].value.length>0 ? ele[0].value : null, rangeValue: {  from: ele[1].value.length>0 ? parseInt(ele[1].value) : null, to: ele[2].value.length>0 ? parseInt(ele[2].value) : null }
                 }
             }
         })
 
-    console.log('newTwoData', ...newTwoData)
+    // console.log('newTwoData', ...newTwoData)
 
     const [data,setData] = React.useState({
         driverId: 'CGNAT',
@@ -86,11 +86,11 @@ function FilterSearch(){
     
     const { driverId,filters } = data
 
-    console.log("date>>>>>>>>>>>",filters);
+    // console.log("date>>>>>>>>>>>",filters);
 
     const [testData,setTestData] = React.useState('')
 
-    console.log("testData",testData);
+    // console.log("testData",testData);
 
     function handleChnage1(event){ 
         setData((prev) => ({
@@ -109,7 +109,7 @@ function FilterSearch(){
         }))
     }
 
-    console.log(data);
+    // console.log(data);
 
     function handlesubmit(event){
         event.preventDefault()
@@ -119,7 +119,7 @@ function FilterSearch(){
                 'Content-Type': 'application/json'
             }
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             setTestData(res.data)
         }).catch((err) => console.log(err))
     }

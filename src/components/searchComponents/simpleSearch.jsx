@@ -18,7 +18,7 @@ function SearchInstances(){
 
     const [testData,setTestData] = React.useState('')
 
-    console.log("testData",testData);
+    // console.log("testData",testData);
 
     const { driverId, content,limit } = data
 
@@ -30,7 +30,7 @@ function SearchInstances(){
         }))
     }
 
-    console.log(data);
+    // console.log(data);
 
     function handlesubmit(event){
         event.preventDefault()
