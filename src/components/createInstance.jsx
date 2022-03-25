@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, Card, Container } from "@mui/material";
+import { bottomNavigationActionClasses, Button, Card, Container } from "@mui/material";
 import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { Snackbar } from "@mui/material";
+import { Alert } from "@mui/material";
 
 function CreateInstance(){
 
@@ -13,9 +14,21 @@ function CreateInstance(){
         file: null
     })
 
+    const[snackbar,setSnackbar] = React.useState(false)
+
     const { file } = data;
 
     console.log(data);
+
+    const [main,setMain] = React.useState('')
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setSnackbar(false);
+      };
 
 
     function handleSubmit(event) {
@@ -32,7 +45,9 @@ function CreateInstance(){
             }
         }).then((res) => {
             console.log(res);
-            navigate('/searchinstance')
+            navigate('/');
+            setSnackbar(true);
+            setMain(res);
         }).catch((err) => console.log(err))
     }
 
@@ -64,7 +79,20 @@ function CreateInstance(){
                                 </div>
                            </form>
                     </div>
+                    <div style={{marginTop: "10px",fontSize:'15px',display: main ? "flex" : "none",justifyContent:'center' }}>
+                        Instance Created Successfully
+                    </div>
                 </Card>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }} 
+                    open={snackbar} autoHideDuration={4000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Instance Created Successfully
+                    </Alert>
+                </Snackbar>
             </Container>
         </>
     )
