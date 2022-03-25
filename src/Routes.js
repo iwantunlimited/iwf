@@ -15,9 +15,14 @@ const Routes = () => {
         {
             path: '/',
             element: <Navbar />,
-            children: [
+            children: [ 
                 {
                     path: '/',
+                    element: <CreateInstance />,
+                    // element: <AdvanceSearch  />
+                },
+                {
+                    path: '/simplesearch',
                     element: <SearchInstances />
                 },
                 {
@@ -27,11 +32,6 @@ const Routes = () => {
                 {
                     path: '/advancesearch',
                     element: <FilterSearch />,
-                    // element: <AdvanceSearch  />
-                },,
-                {
-                    path: '/createinstance',
-                    element: <CreateInstance />,
                     // element: <AdvanceSearch  />
                 },
                 {
