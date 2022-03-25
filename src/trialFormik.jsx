@@ -1,9 +1,16 @@
 import { AddCircle, RemoveCircle } from "@mui/icons-material";
-import { Card, Container, TextField,Grid, IconButton } from "@mui/material";
+import { Card, Container, TextField,Grid, IconButton, Switch } from "@mui/material";
 import React from "react";
 
 
 function SampleTrial(){
+
+  const [checked,setChecked] = React.useState([{
+    index: 0,
+    value:false
+  }])
+
+  console.log(checked);
 
   const [ initialState, setInitialState] = React.useState([
         {
@@ -28,11 +35,11 @@ function SampleTrial(){
     <>
       <Container maxWidth="lg">
           <Card elevation={4} style={{padding:'20px'}}>
-                {
+            <Grid item container xs={12} spacing={2}>
+            {
                   initialState && initialState.length > 0 && initialState.map((initialElement,initialIndex) => {
-                    console.log(initialIndex)
                       return(
-                        <Grid item container xs={12} key={initialIndex}>
+                        <Grid item container xs={12} spacing={2} key={initialIndex}>
                             {
                               initialElement?.fields?.map((element,index) => {
                                   return(
@@ -75,6 +82,35 @@ function SampleTrial(){
                               })
                             }
                             <Grid item xs={3}>
+                              <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                                {
+                                  checked.map((cEle,cIndex) => {
+                                    if(cIndex === initialIndex){
+                                      return(
+                                        <>
+                                        <div style={{display: cEle.value === false ? "flex" : "none", color: cEle.value === false ? "#203354" : "gray"}}>value</div>
+                                        <Switch  
+                                          checked={cEle.value}
+                                          onChange={(event) => {
+                                            setChecked((prev) => prev.map((prevEle,prevIndex) => {
+                                              if(prevIndex === initialIndex){
+                                                return{
+                                                  index: initialIndex,
+                                                  value: event.target.checked
+                                                }
+                                              }else return prevEle
+                                            }))
+                                          }}
+                                        />
+                                        <div style={{display: cEle.value === true ? "flex" : "none", color: cEle.value === true ? "#203354" : "gray"}}>Range</div>
+                                        </>
+                                      )
+                                    }
+                                  })
+                                }
+                              </div>
+                            </Grid>
+                            <Grid item xs={3}>
                                 <IconButton
                                   disabled={initialIndex === 0}
                                   onClick={() => {
@@ -87,6 +123,12 @@ function SampleTrial(){
                                   initialState?.length -1 === initialIndex &&
                                   <IconButton
                                   onClick={() => {
+                                    setChecked((prev) => ([
+                                      ...prev,
+                                      {
+                                        value: false
+                                      }
+                                    ]))
                                     setInitialState((prev) => ([
                                       ...prev,
                                       {
@@ -114,6 +156,7 @@ function SampleTrial(){
                       )
                   })
                 }
+            </Grid>
           </Card>
       </Container>
     </>
