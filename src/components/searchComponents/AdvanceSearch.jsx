@@ -189,6 +189,7 @@ function AdvanceSearch(){
                     testData?.payload &&
                     <div style={{width:'100%',height:'600px',background:'white'}}>
                         <DataGrid 
+                            className="dataGridFooter"
                             components={{ Toolbar: GridToolbar }} 
                             rows={testData.payload.map(ele => ({...ele ,id:Math.random()}))}
                             columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),align:'center',flex:1,field:ele, headerName:ele.toUpperCase(), hide:false}))}

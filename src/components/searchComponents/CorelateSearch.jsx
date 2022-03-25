@@ -24,8 +24,8 @@ function CorelateSearch(){
                 }
             },
             {
-                "fieldName" : "",
-                "value" : "",
+                "fieldName" : null,
+                "value" : null,
                 // "fieldName" : "private-ip-address",
                 // "value" : "100.111.254.30"
             }
@@ -48,10 +48,10 @@ function CorelateSearch(){
                     if(index === 0) {
                         return({
                             ...ele,
-                            [event.target.name]: null
                         })
-                    }else{
-                        // console.log('event', event.target.value)
+                    }
+                    else{
+                        // console.log('event', event.target.value.length)
                         return({
                             ...ele,
                             [event.target.name]: event.target.value.length>0 ? event.target.value : null
@@ -251,6 +251,7 @@ function CorelateSearch(){
                     testData?.payload &&
                     <div style={{width:'100%',height:'600px',background:'white',padding:'10px'}}>
                         <DataGrid 
+                            className="dataGridFooter"
                             components={{ Toolbar: GridToolbar }} 
                             rows={testData.payload.map(ele => ({...ele ,id:Math.random()}))}
                             columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),align:'center',width:120,field:ele, headerName:ele.toUpperCase(), hide:false}))}

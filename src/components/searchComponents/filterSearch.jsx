@@ -57,7 +57,7 @@ function FilterSearch(){
     const newTwoData = newDataFields.map((ele, eIndex) => {
             if(toggleButton.filter((tbEle, tBIndex) => tbEle.index === eIndex).length > 0 && toggleButton.filter((tbEle, tBIndex) => tbEle.index === eIndex)[0].name === 'value'){
                 return{
-                    fieldName: ele[0].value.length > 0 ? ele[0].value : null, value: ele[1].value.length>0 ? ele[1].value : null
+                    fieldName: ele[0]?.value?.length > 0 ? ele[0]?.value : null, value: ele[1]?.value?.length>0 ? ele[1]?.value : null
                 }
             } else {
                 return{
@@ -125,7 +125,7 @@ function FilterSearch(){
     }
 
     // console.log(data);
-    console.log('inputFieldsState', inputFieldsState)
+    // console.log('inputFieldsState', inputFieldsState)
 
     return(
         <>
@@ -225,7 +225,7 @@ function FilterSearch(){
                                                                                     if(cItem.name === item.name){
                                                                                         return{
                                                                                             ...cItem,
-                                                                                            value: e.target.value
+                                                                                            value: e.target.value.length>0 ? e.target.value : null
                                                                                         }
                                                                                     } else return cItem
                                                                                 })
@@ -239,7 +239,7 @@ function FilterSearch(){
                                                 ))
                                             
                                             }
-                                            <Grid item xs={3} style={{display:'flex',alignItems:'center'}}>
+                                            <Grid item xs={2} style={{display:'flex',alignItems:'center'}}>
                                                 <div>
                                                     <Button
                                                         variant={toggleButton && toggleButton.filter((tEle, tIndex) => tEle.index === index && tEle.name === 'value').length > 0 ? "contained" : "outlined"} 
@@ -429,7 +429,8 @@ function FilterSearch(){
                     testData?.payload &&
                     <div style={{width:'100%',height:'440px',background:'white',padding:'10px'}}>
                         <DataGrid 
-                         components={{ Toolbar: GridToolbar }} 
+                            className="dataGridFooter"
+                            components={{ Toolbar: GridToolbar }} 
                             rows={testData.payload.map(ele => ({...ele ,id:Math.random()}))}
                             columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),align:'center',width:150,field:ele, headerName:ele.toUpperCase(), hide:false}))}
                         />

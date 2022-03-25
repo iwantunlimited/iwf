@@ -45,7 +45,7 @@ function SearchInstances(){
         }).catch((err) => console.log(err))
     }
 
-    console.log(data);
+    // console.log(data);
 
 
     return(
@@ -128,11 +128,12 @@ function SearchInstances(){
                 {
                     testData?.payload &&
                     <Card className="output-card" >
-                        <DataGrid 
-                            components={{ Toolbar: GridToolbar }} 
-                            rows={testData.payload.map(ele => ({...ele ,id:Math.random()}))}
-                            columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),align:'center',width:115,field:ele, headerName:ele.toUpperCase(), hide:false}))}
-                        />
+                            <DataGrid 
+                                className="dataGridFooter"
+                                components={{ Toolbar: GridToolbar }} 
+                                rows={testData.payload.map(ele => ({...ele ,id:Math.random()}))}
+                                columns={Object.keys(testData.payload[0]).map((ele) => ({id:Math.random(),align:'center',width:115,field:ele, headerName:ele.toUpperCase(), hide:false}))}
+                            />
                     </Card>
                 }
             {/* {
